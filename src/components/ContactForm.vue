@@ -64,6 +64,9 @@
             >
                 Xóa
             </button>
+            <button class="ml-2 btn btn-success" type="button"> 
+                <router-link to="/" class="back">Back</router-link>
+            </button>
         </div>
     </Form>
 </template>

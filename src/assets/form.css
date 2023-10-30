@@ -34,3 +34,8 @@ label {
 .error-feedback {
     color: red;
 }
+
+.back {
+    color: #fff;
+    text-decoration: none;
+}
