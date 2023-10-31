@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/" class="navbar-brand">Ứng dụng Quản lý danh bạ</a>
+        <a href="/login" class="navbar-brand">Ứng dụng Quản lý danh bạ</a>
         <div class="mr-auto navbar-nav">
             <i class="nav-item">
                 <router-link :to="{ name: 'contactbook' }" class="nav-link">
@@ -8,15 +8,17 @@
                     <i class="fas fa-address-book"></i>
                 </router-link>
             </i>
-            <i class="nav-item">
-                <router-link to="/login" class="nav-link">
+            <i class="nav-item" >
+                <router-link to="/" class="nav-link">
                     <b>{{ name }}</b>
                     <i class="fa-solid fa-user"></i>
                 </router-link>
             </i> 
-            <button @click="logout" class="btn btn-dark">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </button>    
+            <i class="nav-item" >
+                <router-link to="/login" class="nav-link" @click="logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </router-link>
+            </i> 
         </div>
     </nav>
 </template>
@@ -28,6 +30,7 @@ export default {
         return {
             name: ""
         };
+        isVisible: false
     },
     mounted() {
         axios.get("http://localhost:3000/user", { headers: { token: localStorage.getItem("token") } })
@@ -39,7 +42,10 @@ export default {
         logout() {
             alert("Bạn đã đăng xuất khỏi ứng dụng!");
             localStorage.clear();
-            this.$router.go("/");
+            // this.$router.go("/login");
+        },
+        hidden() {
+
         }
     }
 };

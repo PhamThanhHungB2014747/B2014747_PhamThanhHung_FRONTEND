@@ -1,4 +1,5 @@
 <template>
+    <h1>CHÀO MỪNG BẠN ĐẾN VỚI ỨNG DỤNG QUẢN LÝ DANH BẠ</h1>
     <section class="vh-100" >
         <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -9,19 +10,19 @@
                     <div class="card-body text-center justify-content-center">
                         <div class="form-outline mb-4">
                             <label for="email">Tên tài khoản</label>
-                            <input type="text" id="email" v-model="email">
+                            <input type="text" id="email" v-model="email" @blur="validate()" :class="{'is-invalid':error.email}">
+                            <div class="invalid-feedback" v-if="error.email">
+                                {{ error.email }}
+                            </div>
                         </div>
                         <div class="form-outline mb-4 ">
                             <label for="password">Mật khẩu</label>
-                            <input type="password" id="password" v-model="password">
+                            <input type="password" id="password" v-model="password" @blur="validate()" :class="{'is-invalid':error.password}">
+                            <div class="invalid-feedback" v-if="error.password">
+                                {{ error.password }}
+                            </div>
                         </div>
-                        <div class="row justify-content-around">
-                            <button @click="login" class="btn btn-primary">Đăng nhập</button>
-                            <button class="btn btn-primary">
-                                <router-link to="/" class="text">Quay lại</router-link>
-                            </button>
-                        </div>
-                        <p class="mt-3">{{ error }}</p>
+                        <button @click="login" class="btn btn-primary">Đăng nhập</button>
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center">
@@ -38,14 +39,16 @@
 </template>
 <script>
 import axios from 'axios';
-
 export default {
     name: "Login",
     data() {
         return {
             email: "",
             password: "",
-            error: ""
+            error: {
+                email:"",
+                password:""
+            }
         };
     },
     methods: {
@@ -59,17 +62,25 @@ export default {
                     if(res.status === 200){
                         localStorage.setItem("token", res.data.token);
                         alert("Đăng nhập thành công");
-                        this.$router.push("/");
+                        this.$router.push("/contact");
                     }
                 })
-                .catch(() => {
-                    if(this.email == "") {
-                        this.error = "Tên tài khoản không được rỗng";
-                    }
-                    else {
-                        this.error = "Tên tài khoản hoặc mật khẩu không đúng";
-                    }
-                });
+        },
+        validate() {
+            let isValid = true;
+            this.error = {
+                email: "",
+                password: "",
+            };
+            if(!this.email) {
+                this.error.email = "tên tài khoản không được rỗng";
+                isValid = false;
+            };
+            if(!this.password) {
+                this.error.password = "mật khẩu là bắt buộc";
+                isValid = false;
+            };
+            return isValid;
         }
     }
 };
@@ -83,15 +94,15 @@ export default {
 .form-outline input[type="password"] {
   background: #fff;
   outline: none;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   border: solid 2px grey;
   height: 32px;
-  margin-left: 24px;
+  margin-left: 30px;
 }
 .form-outline input[type="text"] {
   background: #fff;
   outline: none;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   border: solid 2px grey;
   height: 32px;
 }

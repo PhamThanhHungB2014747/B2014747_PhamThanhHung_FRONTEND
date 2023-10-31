@@ -22,7 +22,7 @@
                         <div class="row justify-content-around">
                             <button @click="signup" class="btn btn-primary">Đăng ký</button>
                             <button class="btn btn-primary">
-                                <router-link to="/" class="text">Quay lại</router-link>
+                                <router-link to="/login" class="text">Quay lại</router-link>
                             </button>
                         </div>
                         <p class="mt-3">{{ error }}</p>
@@ -63,7 +63,7 @@ export default {
                         this.error = "Vui lòng nhập đầy đủ thông tin";
                     }
                     else {
-                        this.error = "Tên tài khoản không được sử dụng";
+                        this.error = "Tên tài khoản đã được sử dụng";
                     }
                 });
         }
@@ -79,7 +79,7 @@ export default {
 .form-outline input[type="password"] {
   background: #fff;
   outline: none;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   border: solid 2px grey;
   height: 32px;
   margin-left: 68px;
@@ -87,7 +87,7 @@ export default {
 .form-outline input[type="text"] {
   background: #fff;
   outline: none;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   border: solid 2px grey;
   height: 32px;
   margin-left: 40px;
@@ -95,7 +95,7 @@ export default {
 .form-outline #name {
   background: #fff;
   outline: none;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   border: solid 2px grey;
   height: 32px;
   margin-left: 24px;

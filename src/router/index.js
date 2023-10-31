@@ -5,7 +5,7 @@ import SignUp from "../views/Register.vue";
 
 const routes = [
     {
-        path: "/",
+        path: "/contact",
         name: "contactbook",
         component: ContactBook,
     },
